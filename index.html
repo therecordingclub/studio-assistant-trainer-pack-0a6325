@@ -10,11 +10,12 @@
   :root{
     --bg:#0c0c10; --panel:#121218; --ink:#f0ede6; --muted:#9a978f; --faint:#66645e;
     --line:#23232b; --line-soft:#1a1a20; --gold:#d8ad51; --gold-soft:rgba(216,173,81,.10);
-    --peri:#8f8ff0; --maxw:760px;
+    --good:#57b184; --good-soft:rgba(87,177,132,.14); --bad:#dd6f64; --bad-soft:rgba(221,111,100,.14);
+    --maxw:760px;
   }
-  @media (prefers-color-scheme:light){:root{--bg:#f5f2ea;--panel:#fffdf8;--ink:#211d16;--muted:#5f5a50;--faint:#938d80;--line:#e5dece;--line-soft:#efe9dc;--gold:#8f6b12;--gold-soft:rgba(143,107,18,.08);--peri:#5a5ad0}}
-  :root[data-theme="dark"]{--bg:#0c0c10;--panel:#121218;--ink:#f0ede6;--muted:#9a978f;--faint:#66645e;--line:#23232b;--line-soft:#1a1a20;--gold:#d8ad51;--gold-soft:rgba(216,173,81,.10);--peri:#8f8ff0}
-  :root[data-theme="light"]{--bg:#f5f2ea;--panel:#fffdf8;--ink:#211d16;--muted:#5f5a50;--faint:#938d80;--line:#e5dece;--line-soft:#efe9dc;--gold:#8f6b12;--gold-soft:rgba(143,107,18,.08);--peri:#5a5ad0}
+  @media (prefers-color-scheme:light){:root{--bg:#f5f2ea;--panel:#fffdf8;--ink:#211d16;--muted:#5f5a50;--faint:#938d80;--line:#e5dece;--line-soft:#efe9dc;--gold:#8f6b12;--gold-soft:rgba(143,107,18,.08);--good:#2f7d54;--good-soft:rgba(47,125,84,.12);--bad:#b4483f;--bad-soft:rgba(180,72,63,.10)}}
+  :root[data-theme="dark"]{--bg:#0c0c10;--panel:#121218;--ink:#f0ede6;--muted:#9a978f;--faint:#66645e;--line:#23232b;--line-soft:#1a1a20;--gold:#d8ad51;--gold-soft:rgba(216,173,81,.10);--good:#57b184;--good-soft:rgba(87,177,132,.14);--bad:#dd6f64;--bad-soft:rgba(221,111,100,.14)}
+  :root[data-theme="light"]{--bg:#f5f2ea;--panel:#fffdf8;--ink:#211d16;--muted:#5f5a50;--faint:#938d80;--line:#e5dece;--line-soft:#efe9dc;--gold:#8f6b12;--gold-soft:rgba(143,107,18,.08);--good:#2f7d54;--good-soft:rgba(47,125,84,.12);--bad:#b4483f;--bad-soft:rgba(180,72,63,.10)}
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6;letter-spacing:-.004em;-webkit-font-smoothing:antialiased}
@@ -32,25 +33,51 @@
   .howto p{margin:0 0 8px;font-size:14.5px;line-height:1.55;color:var(--ink)}
   .howto b{color:var(--gold)}
 
-  section{margin-top:52px}
+  section{margin-top:56px}
   .qz-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
   .qz-num{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
   h2{font-size:clamp(22px,3.8vw,28px);letter-spacing:-.025em;font-weight:700;margin:2px 0 4px;text-wrap:balance}
   .qz-when{margin-left:auto;font-size:12px;color:var(--faint);font-weight:600;white-space:nowrap}
   .qz-note{color:var(--muted);font-size:14px;margin:0 0 22px}
 
-  ol.qs{list-style:none;counter-reset:q;margin:0;padding:0;display:flex;flex-direction:column;gap:20px}
+  ol.qs{list-style:none;counter-reset:q;margin:0;padding:0;display:flex;flex-direction:column;gap:26px}
   ol.qs>li{counter-increment:q;position:relative;padding-left:34px}
   ol.qs>li::before{content:counter(q);position:absolute;left:0;top:0;font-size:14px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums}
   .qtext{font-size:16px;line-height:1.5;font-weight:500}
-  .opts{list-style:none;margin:9px 0 0;padding:0;display:flex;flex-direction:column;gap:5px}
-  .opts li{font-size:14.5px;color:var(--muted);padding-left:24px;position:relative;line-height:1.4}
-  .opts li .ol{position:absolute;left:0;font-weight:700;color:var(--faint)}
-  .scenario{background:var(--gold-soft);border-radius:10px;padding:11px 14px;font-size:15px;line-height:1.5;margin-top:2px}
-  .scenario .tag{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px}
-  .blank{color:var(--faint)}
+  .qtext.scenario{background:var(--gold-soft);border-radius:10px;padding:11px 14px;font-weight:400;font-size:15px}
+  .qtext .tag{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px}
+  .opts{display:flex;flex-direction:column;gap:7px;margin-top:10px}
+  .opt{display:flex;align-items:flex-start;gap:11px;padding:10px 13px;border:1px solid var(--line);border-radius:10px;background:var(--panel);cursor:pointer;font-size:15px;line-height:1.45;color:var(--ink)}
+  .opt:hover{border-color:var(--gold)}
+  .opt input{margin:4px 0 0;accent-color:var(--gold);flex:none}
+  .opt.correct{border-color:var(--good);background:var(--good-soft)}
+  .opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+  .opt.mute{opacity:.55}
+  .opt.locked{cursor:default}
+  textarea{display:block;width:100%;margin-top:10px;min-height:76px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink);font:inherit;font-size:15px;line-height:1.5;resize:vertical}
+  textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:var(--gold)}
+  textarea:disabled{opacity:.85}
+  .fb{margin-top:8px;font-size:14px;line-height:1.5}
+  .fb.ok{color:var(--good);font-weight:600}
+  .fb.no{color:var(--bad);font-weight:600}
+  .model{margin-top:8px;padding:11px 13px;border-left:2px solid var(--gold);font-size:14.5px;line-height:1.5;color:var(--ink)}
+  .model .k{display:block;font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+  .mark{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:8px;font-size:13.5px;color:var(--muted)}
+  .mark button{appearance:none;font:inherit;font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+  .mark button:hover{border-color:var(--gold)}
+  .mark button.on{border-color:var(--gold);background:var(--gold-soft);color:var(--gold)}
+  .acts{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:26px;padding-top:18px;border-top:1px solid var(--line)}
+  .btn{appearance:none;font:inherit;font-weight:700;font-size:14.5px;padding:11px 18px;border-radius:999px;border:1px solid var(--gold);background:var(--gold);color:#141414;cursor:pointer}
+  .btn:hover{filter:brightness(1.06)}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn.ghost:hover{border-color:var(--gold)}
+  .score{margin-left:auto;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+  .verdict{width:100%;font-size:14.5px;line-height:1.5;margin-top:4px}
+  .verdict.pass{color:var(--good);font-weight:700}
+  .verdict.fail{color:var(--bad);font-weight:700}
+  .verdict.wait{color:var(--muted)}
 
-  details.key{margin-top:56px;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
+  details.key{margin-top:60px;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
   details.key>summary{cursor:pointer;padding:18px 22px;font-weight:700;font-size:16px;list-style:none;display:flex;align-items:center;gap:10px}
   details.key>summary::-webkit-details-marker{display:none}
   details.key>summary::before{content:"▸";color:var(--gold);font-size:13px}
@@ -63,8 +90,17 @@
   .keyblock li{font-size:14px;line-height:1.45;color:var(--ink)}
   .keyblock li b{color:var(--gold);font-weight:700}
   footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px;line-height:1.7}
-  @media print{:root{--bg:#fff;--panel:#fff;--ink:#141414;--muted:#3a3a3a;--faint:#777;--line:#ddd;--gold:#8a6410}nav{display:none}ol.qs>li{break-inside:avoid}#exam ol.qs>li{padding-bottom:46px;border-bottom:1px solid #ddd}.scenario{border:1px solid #8a6410}details.key{break-before:page}.keyblock{break-inside:avoid}}
   .examline{font-size:13px;color:var(--faint);margin:0 0 20px;letter-spacing:.02em}
+  @media print{
+    :root{--bg:#fff;--panel:#fff;--ink:#141414;--muted:#3a3a3a;--faint:#777;--line:#bbb;--gold:#8a6410}
+    nav,.acts,.mark{display:none}
+    ol.qs>li{break-inside:avoid}
+    textarea{min-height:90px;border:1px solid #bbb}
+    .opt{border:1px solid #bbb}
+    .qtext.scenario{border:1px solid #8a6410}
+    details.key{break-before:page}
+    .keyblock{break-inside:avoid}
+  }
 </style>
 </head>
 <body>
@@ -75,7 +111,7 @@
     <div class="wordmark"><span class="dot"></span> The Recording Club · Studio Assistant Program</div>
     <div class="label" style="margin-top:24px">Assessment pack</div>
     <h1>Quizzes &amp; the Final Exam</h1>
-    <p class="lede">Five pop-quiz sets from Week 1 through Month 2, then the Membership Specs Final Exam. Every answer comes straight from the study library, mostly the Membership Guide. The answer key at the bottom is for the trainer. Keep it closed while an assistant is taking a quiz.</p>
+    <p class="lede">Five pop-quiz sets from Week 1 through Month 2, then the Membership Specs Final Exam. Multiple choice where there is one right answer, write-in where the assistant has to explain. Every answer comes from the study library, mostly the Membership Guide.</p>
     <nav>
       <a href="#q1">1 · Rooms</a>
       <a href="#q2">2 · Membership &amp; credits</a>
@@ -86,259 +122,236 @@
       <a href="#key">Answer key</a>
     </nav>
     <div class="howto">
+      <p><b>On screen:</b> answer a section, press <b>Check answers</b>. Multiple choice is scored on the spot; written answers reveal the model answer, and you mark them yourself. <b>Clear and retake</b> reshuffles the choices, so it can be run as many times as it takes.</p>
       <p><b>Pop quizzes:</b> pulled at random through Months 1 and 2. Give them cold, no notes. Short and oral is fine.</p>
-      <p><b>Final exam:</b> end of Month 2. Written, closed-book. One point per question, all parts right. The four scenarios are two points each: one for the numbers, one for the reasoning. <b>29 points, pass at 27</b> (90%), because an assistant quotes these numbers to members. Retake until passed.</p>
+      <p><b>Final exam:</b> end of Month 2. Closed-book, on the trainer's screen or printed. One point per question, all parts right. The four scenarios are two points each: one for the numbers, one for the reasoning. <b>29 points, pass at 27</b> (90%), because an assistant quotes these numbers to members. Retake until passed.</p>
       <p><b>Teach one rule above all:</b> unsure of a number? Look it up first. Never quote a price you are guessing.</p>
     </div>
   </header>
 
-  <!-- QUIZ 1 -->
-  <section id="q1">
-    <div class="qz-head"><span class="qz-num">Pop quiz 1</span><span class="qz-when">Month 1</span></div>
-    <h2>The rooms</h2>
-    <p class="qz-note">Name the five rooms and know what each one is for.</p>
-    <ol class="qs">
-      <li><div class="qtext">Name all five studio rooms.</div></li>
-      <li><div class="qtext">Which room is the "Main Stage," and what is its hourly rate?</div></li>
-      <li><div class="qtext">The Live Room booking includes two other spaces. Which two?</div></li>
-      <li><div class="qtext">What does the Recording Room rent for per hour, and what is it built around?</div></li>
-      <li><div class="qtext">Which room is purpose-built for live streaming a full band, and how many synced cameras does it have?</div></li>
-      <li><div class="qtext">How many people does the Podcast Room seat, how many cameras does it have, and what does it cost per hour?</div></li>
-      <li><div class="qtext">A member wants to book the whole club for an event. What do you do, and what do you never do?</div></li>
-      <li><div class="qtext">True or false: all rooms are set up "plug-and-play" by default.</div></li>
-    </ol>
-  </section>
+  <div id="app"></div>
+  <noscript><p class="lede">Turn on JavaScript to take the quizzes on screen. The answer key is at the bottom of the printed page.</p></noscript>
 
-  <!-- QUIZ 2 -->
-  <section id="q2">
-    <div class="qz-head"><span class="qz-num">Pop quiz 2</span><span class="qz-when">Month 1 to 2</span></div>
-    <h2>Membership &amp; credits</h2>
-    <p class="qz-note">The tiers, the credits, and how credit actually works.</p>
-    <ol class="qs">
-      <li><div class="qtext">Name the three membership tiers and their monthly cost.</div></li>
-      <li><div class="qtext">How much monthly studio credit does each tier get?</div></li>
-      <li><div class="qtext">What is the simple relationship between a tier's monthly cost and its credit?</div></li>
-      <li><div class="qtext">How long does unused studio credit roll over?</div></li>
-      <li><div class="qtext">What can studio credit be used for, and name one thing it cannot be used for.</div></li>
-      <li><div class="qtext">A member buys extra studio hours beyond their credit. What is the "double credit" benefit?</div></li>
-      <li><div class="qtext">Which tier includes 24-hour access, and on which days?</div></li>
-      <li><div class="qtext">True or false: studio credit can be spent on an engineer.</div></li>
-    </ol>
-  </section>
-
-  <!-- QUIZ 3 -->
-  <section id="q3">
-    <div class="qz-head"><span class="qz-num">Pop quiz 3</span><span class="qz-when">Month 2</span></div>
-    <h2>Fees &amp; setup</h2>
-    <p class="qz-note">The numbers a member will ask you about at the desk.</p>
-    <ol class="qs">
-      <li><div class="qtext">What is the Set Up / Breakdown fee for the Live Room? For the Podcast Room?</div></li>
-      <li><div class="qtext">A member changed the routing and left the room off-standard. What reset fee applies in the Live Room versus the other rooms?</div></li>
-      <li><div class="qtext">What is the Equipment Relocation fee for one piece of gear? For two or more?</div></li>
-      <li><div class="qtext">How many participants can a member bring to a session before they need studio approval, and what does each extra one cost after that?</div></li>
-      <li><div class="qtext">What is the guest day fee?</div></li>
-      <li><div class="qtext">Name the three house engineer roles and their starting hourly rates.</div></li>
-      <li><div class="qtext">When is a member required to have an engineer?</div></li>
-      <li><div class="qtext">What is in the TRC Full Production Package, what does it cost, and which room is it exclusive to?</div></li>
-      <li><div class="qtext">Half-day and full-day buyouts: how many hours, starting at what, and what is billed separately?</div></li>
-    </ol>
-  </section>
-
-  <!-- QUIZ 4 -->
-  <section id="q4">
-    <div class="qz-head"><span class="qz-num">Pop quiz 4</span><span class="qz-when">Month 1</span></div>
-    <h2>Hospitality &amp; access</h2>
-    <p class="qz-note">The vibe, the hours, and how members move through the space.</p>
-    <ol class="qs">
-      <li><div class="qtext">When do assistants open, when do doors open to members, when do we close Tuesday to Saturday and on Sunday, and which day are we closed?</div></li>
-      <li><div class="qtext">Name the three pillars of the club.</div></li>
-      <li><div class="qtext">What is the club's full name, and who is the founder?</div></li>
-      <li><div class="qtext">When can members use the lounge, social, and wellness areas?</div></li>
-      <li><div class="qtext">What should a member do before using the wellness area?</div></li>
-      <li><div class="qtext">A session's extra personnel want to use the lounge and amenities. What do they need to buy, and for how much?</div></li>
-      <li><div class="qtext">Name the two communication habits the whole program is built on, and say what each one looks like in practice.</div></li>
-      <li><div class="qtext">Something breaks or crackles during your shift. When do you log it, where, and who do you tell?</div></li>
-      <li><div class="qtext">A member hits a problem mid-session. What is the one thing you never do in front of them, and what do you do instead?</div></li>
-      <li><div class="qtext">"Keeping the studio up to par" means what, concretely, at the end of every session?</div></li>
-      <li><div class="qtext">Give a two-sentence version of the tour opening you would say to a first-time visitor.</div></li>
-    </ol>
-  </section>
-
-  <!-- QUIZ 5 -->
-  <section id="q5">
-    <div class="qz-head"><span class="qz-num">Pop quiz 5</span><span class="qz-when">Week 1</span></div>
-    <h2>The program</h2>
-    <p class="qz-note">The terms of the assistant program itself. Everyone should clear this in week one.</p>
-    <ol class="qs">
-      <li><div class="qtext">What is the weekly hours minimum, and is it a floor or a ceiling?</div></li>
-      <li><div class="qtext">What do you earn, per hour and roughly per week at the minimum?</div></li>
-      <li><div class="qtext">When is next week's schedule due, and what happens if you miss it?</div></li>
-      <li><div class="qtext">What does a no-show lead to?</div></li>
-      <li><div class="qtext">What two roles must be covered every open day, and what time does the opener start?</div></li>
-      <li><div class="qtext">Name the areas of work an assistant touches.</div></li>
-      <li><div class="qtext">Who do audio questions go to? Video questions? The program itself?</div></li>
-      <li><div class="qtext">When does the program start and end?</div></li>
-    </ol>
-  </section>
-
-  <!-- FINAL EXAM -->
-  <section id="exam">
-    <div class="qz-head"><span class="qz-num">Final exam</span><span class="qz-when">End of Month 2 · 27 of 29 to pass</span></div>
-    <h2>Membership specs</h2>
-    <p class="qz-note">Closed book. Answer in full. One point each; scenarios are two points, one for the numbers and one for the reasoning.</p>
-    <p class="examline">Name ______________________ &nbsp; Date ____________ &nbsp; Score ______ / 29</p>
-    <ol class="qs">
-      <li><div class="qtext">List all three tiers with monthly cost and monthly credit.</div></li>
-      <li><div class="qtext">Credit equals how many times the monthly fee?</div></li>
-      <li><div class="qtext">How long does credit roll over, and what is the one thing it may be spent on?</div></li>
-      <li><div class="qtext">Explain the double-credit benefit for purchased hours in one sentence.</div></li>
-      <li><div class="qtext">Name the five rooms.</div></li>
-      <li><div class="qtext">Live Room: rate, and the two spaces included.</div></li>
-      <li><div class="qtext">Recording Room and Rehearsal Room each rent for how much? Podcast Room?</div></li>
-      <li><div class="qtext">Which rooms come with a vocal booth?</div></li>
-      <li><div class="qtext">Set Up / Breakdown fees for all five rooms.</div></li>
-      <li><div class="qtext">Reset fee if a room is left off-standard: Live Room vs. other rooms.</div></li>
-      <li><div class="qtext">Equipment relocation: one piece, and two or more.</div></li>
-      <li><div class="qtext">Maximum participants before approval, and the per-person fee beyond it.</div></li>
-      <li><div class="qtext">A member hits a problem mid-session. What is the one thing you never do in front of them, and what do you do instead?</div></li>
-      <li><div class="qtext">House engineer starting rates: audio, video, lighting.</div></li>
-      <li><div class="qtext">When is an engineer required, and can a member bring their own?</div></li>
-      <li><div class="qtext">TRC Full Production Package: price, minimum, room, and everything it includes.</div></li>
-      <li><div class="qtext">A member asks what it costs to take over the whole club for a night. What do you say and do?</div></li>
-      <li><div class="qtext">Studio hours across the week: when assistants open, when doors open, closing times, and the closed day.</div></li>
-      <li><div class="qtext">The two communication habits the program is built on, and what each one means in practice.</div></li>
-      <li><div class="qtext">What is the default room setup called, and what must a member restore before leaving to avoid a reset fee?</div></li>
-      <li><div class="scenario"><span class="tag">Scenario · counts double</span>A Club member ($450 tier) wants to book the Live Room for a 3-hour full-band session with a custom stage setup and a house audio engineer. Walk through what you tell them: the room rate, the setup fee, the engineer requirement and rate, and roughly what their studio credit will and won't cover.</div></li>
-      <li><div class="scenario"><span class="tag">Scenario · counts double</span>A member asks to bring eight people to their session. What do you tell them about the limit, approval, and cost?</div></li>
-      <li><div class="scenario"><span class="tag">Scenario · counts double</span>A member is upset that they were charged a reset fee. They say they "put everything back." How do you explain what the reset standard actually requires, and what could have caused the fee?</div></li>
-      <li><div class="scenario"><span class="tag">Scenario · counts double</span>A prospective member on a tour asks, "what's the real difference between Club and Platinum besides price?" Give the honest, specific answer.</div></li>
-      <li><div class="qtext">In your own words: why do we require an engineer when studio equipment is in use?</div></li>
-    </ol>
-  </section>
-
-  <!-- ANSWER KEY -->
   <details class="key" id="key">
     <summary>Trainer answer key <span class="sub">keep closed during a quiz</span></summary>
-    <div class="keybody">
-
-      <div class="keyblock">
-        <h4>Pop quiz 1 · The rooms</h4>
-        <ol>
-          <li><b>Live Room, Mixing Room, Recording Room, Rehearsal Room, Podcast Room.</b></li>
-          <li>The <b>Live Room</b> is the Main Stage. <b>$180/hour.</b></li>
-          <li>The Live Room booking includes the <b>Isolation Booth and the Mixing Room.</b></li>
-          <li><b>$120/hour.</b> Built around a mixing console facing the vocal booth (separate from front-of-house), with OBS-synced video.</li>
-          <li>The <b>Rehearsal Room</b>, with <b>five synced cameras</b> (also has IEMs for up to 8 and an amp isolation closet).</li>
-          <li>Up to <b>four people</b>, <b>three cameras</b>, <b>$90/hour.</b></li>
-          <li>Take the <b>date, headcount, and plan</b> and <b>route it to Jacob</b> for a proposal. You may say buyouts <b>start at $5,000</b> for a half day; <b>never quote</b> a package price you were not given, and never the old guide's rental numbers.</li>
-          <li><b>True.</b></li>
-        </ol>
-      </div>
-
-      <div class="keyblock">
-        <h4>Pop quiz 2 · Membership &amp; credits</h4>
-        <ol>
-          <li><b>Club $450, Gold $900, Platinum $1,800</b> per month.</li>
-          <li><b>Club $1,350 · Gold $2,700 · Platinum $5,400.</b></li>
-          <li>Credit is <b>3× the monthly cost.</b></li>
-          <li><b>Up to three months.</b></li>
-          <li>Only toward <b>studio rental costs.</b> Never for engineers, add-ons, or fees.</li>
-          <li><b>Double studio credit per dollar</b> when buying extra hours, so added studio time at half the retail cost.</li>
-          <li><b>Platinum</b>, 24-hour access <b>on open days.</b></li>
-          <li><b>False.</b></li>
-        </ol>
-      </div>
-
-      <div class="keyblock">
-        <h4>Pop quiz 3 · Fees &amp; setup</h4>
-        <ol>
-          <li>Live Room <b>$100</b>; Podcast Room <b>$30.</b> (Mixing, Recording, Rehearsal are $60 each.)</li>
-          <li>Live Room <b>$50</b>; all other rooms <b>$30.</b></li>
-          <li>One piece <b>$150</b>; two or more <b>$200</b> (not included in the setup/breakdown fee).</li>
-          <li>Up to <b>six</b> before approval; <b>$10 per additional participant</b> beyond six, with studio approval.</li>
-          <li><b>$25 per day.</b></li>
-          <li>Audio <b>from $30/hr</b>, Video <b>from $35/hr</b>, Lighting <b>from $50/hr.</b></li>
-          <li>Whenever they are <b>working with studio equipment</b> (they may bring their own engineer).</li>
-          <li><b>$250/hour, 3-hour minimum, Live Room only.</b> Includes 1 Head Audio Engineer, 1 Video Director, 2 Camera Operators, 1 Lighting Designer, and full setup/breakdown.</li>
-          <li>Half day <b>six hours from $5,000</b>; full day <b>twelve hours from $12,000</b>; <b>catering and additional staff</b> billed separately. Member and multi-day rates exist; Jacob builds the package.</li>
-        </ol>
-      </div>
-
-      <div class="keyblock">
-        <h4>Pop quiz 4 · Hospitality &amp; access</h4>
-        <ol>
-          <li>Assistants open <b>11am</b>; doors to members <b>12pm</b>; close <b>midnight Tue to Sat, 8pm Sun</b>; <b>closed Mondays</b> (and major holidays).</li>
-          <li><b>Studio, Community, Wellness.</b></li>
-          <li><b>The Recording Club by Tiny Room Studios</b>; founder <b>Greg Spero.</b></li>
-          <li>Any time <b>during operating hours</b> (Platinum: 24 hours on open days).</li>
-          <li><b>Schedule ahead with the team.</b></li>
-          <li>A <b>day pass, $25.</b></li>
-          <li><b>Over-communicate</b> and <b>never assume.</b> In practice: confirm every advance item is actually done, ask before the session rather than during it, and close the loop in writing.</li>
-          <li><b>Immediately</b>, in the Issues &amp; Solutions log, and tell the engineer on duty. Never leave it for the next shift to find.</li>
-          <li><b>Never troubleshoot in front of the artist or client.</b> Solve it quietly and fast, pull in the engineer on duty, and log it afterward.</li>
-          <li>Every room goes back to the <b>plug-and-play standard</b>, routing included (run the Room Procedures list), and the common areas are reset. The details are the job.</li>
-          <li>Judgment: warm, specific, names Studio / Community / Wellness and the real rooms. There is no set script, but it should sound like the club, not a sales pitch.</li>
-        </ol>
-      </div>
-
-      <div class="keyblock">
-        <h4>Pop quiz 5 · The program</h4>
-        <ol>
-          <li><b>20 hours a week</b>, a <b>floor</b> with no maximum.</li>
-          <li><b>$20 an hour in studio credits</b>, about <b>$400 a week</b> at the minimum. Unpaid otherwise.</li>
-          <li>Due <b>5pm Friday</b>; miss it and <b>shifts get assigned</b> to you.</li>
-          <li>A <b>meeting, a warning, and an eligibility review.</b></li>
-          <li>An <b>opener and a closer</b>; the opener starts at <b>11am</b> (doors to members at 12pm; closer is last out).</li>
-          <li>Hospitality, audio, video, lighting, events, business, social, IT. Everyone touches all of it, then specializes. Cleaning included.</li>
-          <li>Audio <b>Elijah</b>, video <b>Ari</b>, the program <b>Jacob</b>.</li>
-          <li><b>September 1, 2026 to January 3, 2027.</b></li>
-        </ol>
-      </div>
-
-      <div class="keyblock">
-        <h4>Final exam · Membership specs</h4>
-        <ol>
-          <li>Club $450 / $1,350 · Gold $900 / $2,700 · Platinum $1,800 / $5,400.</li>
-          <li><b>3×.</b></li>
-          <li><b>Up to three months</b>; only on <b>studio rental.</b></li>
-          <li>Extra hours earn <b>double credit per dollar</b> (half retail cost).</li>
-          <li>Live, Mixing, Recording, Rehearsal, Podcast.</li>
-          <li><b>$180/hr</b>, includes <b>Isolation Booth + Mixing Room.</b></li>
-          <li>Recording <b>$120</b>, Rehearsal <b>$120</b>, Podcast <b>$90.</b></li>
-          <li><b>Recording Room and Rehearsal Room</b> (each has a vocal booth). The Live Room's Isolation Booth is a different space and does not count.</li>
-          <li>Live <b>$100</b> · Mixing <b>$60</b> · Recording <b>$60</b> · Rehearsal <b>$60</b> · Podcast <b>$30.</b></li>
-          <li>Live <b>$50</b>; other rooms <b>$30.</b></li>
-          <li>One <b>$150</b>; two or more <b>$200.</b></li>
-          <li><b>Six</b>; <b>$10</b> each beyond, with approval.</li>
-          <li><b>Never troubleshoot in front of the artist or client.</b> Solve it quietly and fast, bring in the engineer on duty, and log it afterward.</li>
-          <li>Audio <b>$30</b>, Video <b>$35</b>, Lighting <b>$50</b> (all "starting at," per hour).</li>
-          <li>When <b>using studio equipment</b>; <b>yes</b>, they may bring their own.</li>
-          <li><b>$250/hr, 3-hr min, Live Room only</b>: Head Audio Engineer, Video Director, 2 Camera Operators, Lighting Designer, full setup/breakdown.</li>
-          <li>Buyouts <b>start at $5,000 for a half day</b> (six hours: production manager, A/V engineer, basic lighting) and <b>$12,000 for a full day</b> (twelve hours: dedicated production team, A/V crew, lighting designer, post-event content). Catering and extra staff are separate; member rates exist. Say "starting at", collect the <b>date, headcount, and plan</b>, and pass it to Jacob the same day.</li>
-          <li>Assistants open 11am, doors 12pm; close midnight Tue to Sat, 8pm Sun; <b>closed Mondays.</b></li>
-          <li><b>Over-communicate</b> and <b>never assume</b>: confirm every advance item is actually done, ask before the session rather than during it, and close the loop in writing.</li>
-          <li><b>Plug-and-play.</b> Restore any changed <b>software routing</b> to standard (run the Room Procedures list) and return the room to standard setup.</li>
-          <li><b>Scenario.</b> Live Room $180/hr (so 3 hrs = $540 room); custom stage setup adds the <b>$100</b> Live Room setup/breakdown fee; a house audio engineer is <b>required</b> when using studio gear, from <b>$30/hr</b>; so at least <b>$90</b> for three hours; their $1,350 monthly credit covers the <b>$540 of room time</b> and nothing else. The setup fee and the engineer are billed separately (and if gear is moved between rooms, relocation is $150 or $200 on top). Full marks = the room rate, the setup fee, the engineer requirement + rate, and credit covering the room only.</li>
-          <li><b>Scenario.</b> Up to six is fine; eight needs <b>studio approval</b> and <b>$10 per person beyond six</b> (so two extra = $20), and extra personnel have limited facility access unless they buy a $25 day pass.</li>
-          <li><b>Scenario.</b> "Put everything back" is not the standard: the room must be returned to the <b>plug-and-play standard AND any changed software routing restored</b> via the Room Procedures list. A left-over routing change or a non-standard physical setup triggers the fee ($50 Live, $30 others). Full marks = explains the routing/procedures requirement, not just "tidy up."</li>
-          <li><b>Scenario.</b> Honest answer: it is not just price. Every tier gets the <b>same 3× ratio</b>, so Platinum's $5,400 is four times Club's $1,350, with a bigger rollover bank to match, and <b>Platinum adds 24-hour access</b> on open days. Everything else (rooms, community, wellness, events) is shared. Do not invent perks.</li>
-          <li>Judgment: safety and protecting the gear and the session. Full marks name protecting expensive equipment and keeping the session running smoothly for the member.</li>
-        </ol>
-      </div>
-
-    </div>
+    <div class="keybody" id="keybody"></div>
   </details>
 
   <footer>
     The Recording Club by Tiny Room Studios · Studio Assistant Program.<br>
-    Answers verified against the Membership Guide. Prices change: before each exam cycle, check every figure against the current guide and update this pack.
+    Answers verified against the Membership Guide; event figures from the TRC Events page. Prices change: before each exam cycle, check every figure against the current guide and update this pack.
   </footer>
-
 </div>
+
 <script>
-(function(){var k=document.getElementById("key");if(!k)return;
-window.addEventListener("beforeprint",function(){k.open=true;});
-var a=document.querySelector('nav a[href="#key"]');if(a)a.addEventListener("click",function(){k.open=true;});})();
+(function(){
+  // type: "mc" = multiple choice (a = index of the correct choice in c);
+  //       "write" = written answer, 1 point, self-marked against the model answer;
+  //       "scenario" = written, 2 points (numbers + reasoning), self-marked.
+  var QUIZZES=[
+    {id:"q1",num:"Pop quiz 1",when:"Month 1",title:"The rooms",note:"Name the five rooms and know what each one is for.",items:[
+      {type:"write",q:"Name all five studio rooms.",a:"Live Room, Mixing Room, Recording Room, Rehearsal Room, Podcast Room."},
+      {type:"mc",q:"Which room is the 'Main Stage', and what is its hourly rate?",c:["The Live Room, $180 an hour","The Recording Room, $120 an hour","The Rehearsal Room, $180 an hour","The Live Room, $250 an hour"],a:0},
+      {type:"mc",q:"The Live Room booking includes two other spaces. Which two?",c:["The Isolation Booth and the Mixing Room","The Vocal Booth and the Podcast Room","The Lounge and the Patio","The Recording Room and the Mezzanine"],a:0},
+      {type:"mc",q:"What does the Recording Room rent for per hour, and what is it built around?",c:["$120 an hour; its vocal booth","$90 an hour; a podcast desk","$180 an hour; a stage","$120 an hour; a DJ booth"],a:0},
+      {type:"mc",q:"Which room is purpose-built for live streaming a full band, and how many synced cameras does it have?",c:["The Rehearsal Room, five synced cameras","The Live Room, three cameras","The Podcast Room, five cameras","The Rehearsal Room, two cameras"],a:0},
+      {type:"mc",q:"How many people does the Podcast Room seat, how many cameras does it have, and what does it cost per hour?",c:["Up to four people, three cameras, $90 an hour","Up to six people, five cameras, $120 an hour","Up to two people, one camera, $60 an hour","Up to four people, two cameras, $120 an hour"],a:0},
+      {type:"write",q:"A member wants to book the whole club for an event. What do you do, and what do you never do?",a:"Take the date, headcount, and plan and route it to Jacob for a proposal. You may say buyouts start at $5,000 for a half day; never quote a package price you were not given, and never the old guide's rental numbers."},
+      {type:"mc",q:"True or false: all rooms are set up 'plug-and-play' by default.",c:["True","False"],a:0}
+    ]},
+    {id:"q2",num:"Pop quiz 2",when:"Month 1 to 2",title:"Membership & credits",note:"The tiers, the credits, and how credit actually works.",items:[
+      {type:"mc",q:"Name the three membership tiers and their monthly cost.",c:["Club $450, Gold $900, Platinum $1,800","Club $450, Gold $1,350, Platinum $2,700","Silver $450, Gold $900, Platinum $1,800","Club $500, Gold $1,000, Platinum $2,000"],a:0},
+      {type:"mc",q:"How much monthly studio credit does each tier get?",c:["Club $1,350, Gold $2,700, Platinum $5,400","Club $450, Gold $900, Platinum $1,800","Club $1,000, Gold $2,000, Platinum $4,000","Club $1,350, Gold $2,700, Platinum $4,050"],a:0},
+      {type:"mc",q:"What is the simple relationship between a tier's monthly cost and its credit?",c:["Credit is three times the monthly cost","Credit equals the monthly cost","Credit is double the monthly cost","Credit is half the monthly cost"],a:0},
+      {type:"mc",q:"How long does unused studio credit roll over?",c:["Up to three months","One month","Six months","It never expires"],a:0},
+      {type:"write",q:"What can studio credit be used for, and name one thing it cannot be used for.",a:"Studio rental only. Never engineers, add-ons, or fees."},
+      {type:"mc",q:"A member buys extra studio hours beyond their credit. What is the 'double credit' benefit?",c:["Extra hours earn double credit per dollar, so studio time at half the retail cost","A free engineer comes with every purchase","The first extra hour is free","Credit doubles at the end of the year"],a:0},
+      {type:"mc",q:"Which tier includes 24-hour access, and on which days?",c:["Platinum, on open days","Gold, every day","Platinum, every day including Mondays","Club, on weekends"],a:0},
+      {type:"mc",q:"True or false: studio credit can be spent on an engineer.",c:["False","True"],a:0}
+    ]},
+    {id:"q3",num:"Pop quiz 3",when:"Month 2",title:"Fees & setup",note:"The numbers a member will ask you about at the desk.",items:[
+      {type:"mc",q:"What is the Set Up / Breakdown fee for the Live Room? For the Podcast Room?",c:["Live $100, Podcast $30","Live $60, Podcast $30","Live $100, Podcast $60","Live $150, Podcast $50"],a:0},
+      {type:"mc",q:"A member changed the routing and left the room off-standard. What reset fee applies in the Live Room versus the other rooms?",c:["$50 in the Live Room, $30 in every other room","$30 in the Live Room, $50 in every other room","$100 in every room","$50 in every room"],a:0},
+      {type:"mc",q:"What is the Equipment Relocation fee for one piece of gear? For two or more?",c:["$150 for one piece, $200 for two or more","$100 for one piece, $150 for two or more","$150 per piece","$200 for one piece, $300 for two or more"],a:0},
+      {type:"mc",q:"How many participants can a member bring before they need studio approval, and what does each extra one cost after that?",c:["Six; then approval and $10 per extra person","Four; then approval and $25 per extra person","Ten; then $10 per extra person","Six; then $25 per extra person"],a:0},
+      {type:"mc",q:"What is the guest day fee?",c:["$25","$10","$50","Free"],a:0},
+      {type:"mc",q:"Name the three house engineer roles and their starting hourly rates.",c:["Audio from $30, video from $35, lighting from $50","Audio from $50, video from $35, lighting from $30","Audio from $30, video from $30, lighting from $30","Audio from $25, video from $45, lighting from $60"],a:0},
+      {type:"mc",q:"When is a member required to have an engineer?",c:["Whenever studio equipment is in use; they may bring their own","Only in the Live Room","Only for sessions over four hours","Never; engineers are optional"],a:0},
+      {type:"write",q:"What is in the TRC Full Production Package, what does it cost, and which room is it exclusive to?",a:"$250 an hour, 3-hour minimum, Live Room only. Includes a Head Audio Engineer, a Video Director, 2 Camera Operators, a Lighting Designer, and full setup and breakdown."},
+      {type:"mc",q:"Half-day and full-day buyouts: how many hours, starting at what, and what is billed separately?",c:["Half day six hours from $5,000; full day twelve hours from $12,000; catering and extra staff separate","Half day four hours from $2,000; full day eight hours from $5,000; everything included","Half day six hours from $12,000; full day twelve hours from $20,000; catering separate","Any length at $1,000 an hour; nothing separate"],a:0}
+    ]},
+    {id:"q4",num:"Pop quiz 4",when:"Month 1",title:"Hospitality & access",note:"The vibe, the hours, and how members move through the space.",items:[
+      {type:"mc",q:"When do assistants open, when do doors open to members, when do we close, and which day are we closed?",c:["Assistants 11am, doors 12pm; close midnight Tuesday to Saturday, 8pm Sunday; closed Mondays","Open 10am, close 10pm, every day","Doors 12pm; close midnight every day; closed Sundays","Assistants 9am, doors 11am; close 8pm; closed Mondays"],a:0},
+      {type:"mc",q:"Name the three pillars of the club.",c:["Studio, Community, Wellness","Studio, Bar, Gym","Music, Art, Film","Record, Mix, Master"],a:0},
+      {type:"mc",q:"What is the club's full name, and who is the founder?",c:["The Recording Club by Tiny Room Studios; founder Greg Spero","The Recording Club LA; founded by a label group","Tiny Room Studios; founder unknown","The Santa Monica Recording Club; founder Greg Spero"],a:0},
+      {type:"mc",q:"When can members use the lounge, social, and wellness areas?",c:["Any time during operating hours; Platinum also has 24-hour access on open days","Only when they have a booking","Weekends only","Only with a day pass"],a:0},
+      {type:"mc",q:"What should a member do before using the wellness area?",c:["Schedule ahead with the team","Pay a $25 fee","Sign a waiver at the desk each time","Nothing; walk in any time"],a:0},
+      {type:"mc",q:"A session's extra personnel want to use the lounge and amenities. What do they need to buy, and for how much?",c:["A day pass, $25","A guest pass, $50","Nothing; personnel have full access","A membership"],a:0},
+      {type:"mc",q:"Name the two communication habits the whole program is built on.",c:["Over-communicate and never assume","Speak up and stay positive","Listen and take notes","Text first, call second"],a:0},
+      {type:"mc",q:"Something breaks or crackles during your shift. When do you log it, where, and who do you tell?",c:["Immediately, in the Issues and Solutions log, and tell the engineer on duty","At the end of the shift, in a text to Jacob","At the end of the month, on the tickets board","Only if a member complains"],a:0},
+      {type:"mc",q:"A member hits a problem mid-session. What is the one thing you never do in front of them, and what do you do instead?",c:["Never troubleshoot in front of the artist; solve it quietly and fast with the engineer on duty, then log it","Never call the engineer; fix it yourself in the room","Never log it; just fix it","Never stop the session; let the member sort it out"],a:0},
+      {type:"mc",q:"'Keeping the studio up to par' means what, concretely, at the end of every session?",c:["Every room goes back to the plug-and-play standard, routing included, and the common areas are reset","Turn off the lights and lock the door","Email the member a thank-you","Refill the coffee machine"],a:0},
+      {type:"write",q:"Give a two-sentence version of the tour opening you would say to a first-time visitor.",a:"Judgment: warm, specific, names Studio / Community / Wellness and the real rooms. There is no set script, but it should sound like the club, not a sales pitch."}
+    ]},
+    {id:"q5",num:"Pop quiz 5",when:"Week 1",title:"The program",note:"The terms of the assistant program itself. Everyone should clear this in week one.",items:[
+      {type:"mc",q:"What is the weekly hours minimum, and is it a floor or a ceiling?",c:["20 hours a week, a floor with no maximum","20 hours a week, a ceiling","10 hours a week, a floor","40 hours a week, a ceiling"],a:0},
+      {type:"mc",q:"What do you earn, per hour and roughly per week at the minimum?",c:["$20 an hour in studio credits, about $400 a week","$20 an hour in cash, about $400 a week","$15 an hour in credits, about $300 a week","Nothing; the program is unpaid with no credits"],a:0},
+      {type:"mc",q:"When is next week's schedule due, and what happens if you miss it?",c:["5pm Friday; miss it and shifts get assigned to you","Sunday night; miss it and you lose credits","Monday morning; nothing happens","Whenever; there is no deadline"],a:0},
+      {type:"mc",q:"What does a no-show lead to?",c:["A meeting, a warning, and an eligibility review","Nothing","Immediate dismissal","A $50 fine"],a:0},
+      {type:"mc",q:"What two roles must be covered every open day, and what time does the opener start?",c:["An opener and a closer; the opener starts at 11am","An engineer and a DJ; 12pm","A manager and a floater; 10am","An opener and a closer; 9am"],a:0},
+      {type:"write",q:"Name the areas of work an assistant touches.",a:"Hospitality, audio, video, lighting, events, business, social, IT. Everyone touches all of it, then specializes. Cleaning included."},
+      {type:"mc",q:"Who do audio questions go to? Video questions? The program itself?",c:["Audio Elijah, video Ari, the program Jacob","Audio Ari, video Elijah, the program Greg","Audio Jacob, video Ari, the program Elijah","Everything goes to Greg"],a:0},
+      {type:"mc",q:"When does the program start and end?",c:["September 1, 2026 to January 3, 2027","September 1, 2026 to January 6, 2027","October 1, 2026 to December 31, 2026","September 15, 2026 to February 1, 2027"],a:0}
+    ]}
+  ];
+
+  var EXAM={id:"exam",num:"Final exam",when:"End of Month 2 · 27 of 29 to pass",title:"Membership specs",note:"Closed book. Answer in full. One point each; scenarios are two points, one for the numbers and one for the reasoning.",pass:27,items:[
+    {type:"write",q:"List all three tiers with monthly cost and monthly credit.",a:"Club $450 / $1,350 · Gold $900 / $2,700 · Platinum $1,800 / $5,400."},
+    {type:"mc",q:"Credit equals how many times the monthly fee?",c:["3x","2x","1x","4x"],a:0},
+    {type:"mc",q:"How long does credit roll over, and what is the one thing it may be spent on?",c:["Up to three months; studio rental only","One month; anything in the club","Six months; rooms and engineers","Up to three months; rooms and add-ons"],a:0},
+    {type:"write",q:"Explain the double-credit benefit for purchased hours in one sentence.",a:"Extra hours purchased earn double credit per dollar, so added studio time at half the retail cost."},
+    {type:"write",q:"Name the five rooms.",a:"Live, Mixing, Recording, Rehearsal, Podcast."},
+    {type:"mc",q:"Live Room: rate, and the two spaces included.",c:["$180 an hour; the Isolation Booth and the Mixing Room","$120 an hour; the Vocal Booth and the Lounge","$180 an hour; the Recording Room and the Patio","$250 an hour; the Isolation Booth and the Mezzanine"],a:0},
+    {type:"mc",q:"Recording Room and Rehearsal Room each rent for how much? Podcast Room?",c:["Recording $120, Rehearsal $120, Podcast $90","Recording $90, Rehearsal $120, Podcast $60","Recording $120, Rehearsal $180, Podcast $90","Recording $150, Rehearsal $150, Podcast $100"],a:0},
+    {type:"mc",q:"Which rooms come with a vocal booth?",c:["Recording Room and Rehearsal Room","Live Room and Podcast Room","Recording Room only","All five rooms"],a:0},
+    {type:"write",q:"Set Up / Breakdown fees for all five rooms.",a:"Live $100 · Mixing $60 · Recording $60 · Rehearsal $60 · Podcast $30."},
+    {type:"mc",q:"Reset fee if a room is left off-standard: Live Room vs. other rooms.",c:["Live $50; other rooms $30","Live $30; other rooms $50","$50 everywhere","$100 in the Live Room; nothing elsewhere"],a:0},
+    {type:"mc",q:"Equipment relocation: one piece, and two or more.",c:["One $150; two or more $200","One $100; two or more $150","$150 each","One $200; two or more $300"],a:0},
+    {type:"mc",q:"Maximum participants before approval, and the per-person fee beyond it.",c:["Six; $10 each beyond, with approval","Four; $25 each beyond","Eight; $10 each beyond","Six; $25 each beyond"],a:0},
+    {type:"write",q:"A member hits a problem mid-session. What is the one thing you never do in front of them, and what do you do instead?",a:"Never troubleshoot in front of the artist or client. Solve it quietly and fast, bring in the engineer on duty, and log it afterward."},
+    {type:"mc",q:"House engineer starting rates: audio, video, lighting.",c:["Audio $30, video $35, lighting $50","Audio $35, video $30, lighting $50","Audio $30, video $50, lighting $35","Audio $50, video $35, lighting $30"],a:0},
+    {type:"mc",q:"When is an engineer required, and can a member bring their own?",c:["Whenever studio equipment is used; yes, they may bring their own","Only in the Live Room; no","Only for recording sessions; yes","Never required"],a:0},
+    {type:"write",q:"TRC Full Production Package: price, minimum, room, and everything it includes.",a:"$250 an hour, 3-hour minimum, Live Room only: Head Audio Engineer, Video Director, 2 Camera Operators, Lighting Designer, full setup and breakdown."},
+    {type:"write",q:"A member asks what it costs to take over the whole club for a night. What do you say and do?",a:"Buyouts start at $5,000 for a half day (six hours: production manager, A/V engineer, basic lighting) and $12,000 for a full day (twelve hours: dedicated production team, A/V crew, lighting designer, post-event content). Catering and extra staff are separate; member rates exist. Say 'starting at', collect the date, headcount, and plan, and pass it to Jacob the same day."},
+    {type:"write",q:"Studio hours across the week: when assistants open, when doors open, closing times, and the closed day.",a:"Assistants open 11am, doors 12pm; close midnight Tuesday to Saturday, 8pm Sunday; closed Mondays."},
+    {type:"write",q:"The two communication habits the program is built on, and what each one means in practice.",a:"Over-communicate and never assume: confirm every advance item is actually done, ask before the session rather than during it, and close the loop in writing."},
+    {type:"mc",q:"What is the default room setup called, and what must a member restore before leaving to avoid a reset fee?",c:["Plug-and-play; restore any changed software routing with the Room Procedures list and return the room to standard setup","Custom; nothing, the reset is included","Plug-and-play; just put the gear back","Standard; turn off the console"],a:0},
+    {type:"scenario",q:"A Club member ($450 tier) wants to book the Live Room for a 3-hour full-band session with a custom stage setup and a house audio engineer. Walk through what you tell them: the room rate, the setup fee, the engineer requirement and rate, and roughly what their studio credit will and won't cover.",a:"Live Room $180/hr (so 3 hrs = $540 room); custom stage setup adds the $100 Live Room setup/breakdown fee; a house audio engineer is required when using studio gear, from $30/hr, so at least $90 for three hours; their $1,350 monthly credit covers the $540 of room time and nothing else. The setup fee and the engineer are billed separately (and if gear is moved between rooms, relocation is $150 or $200 on top). Full marks = the room rate, the setup fee, the engineer requirement + rate, and credit covering the room only."},
+    {type:"scenario",q:"A member asks to bring eight people to their session. What do you tell them about the limit, approval, and cost?",a:"Up to six is fine; eight needs studio approval and $10 per person beyond six (so two extra = $20), and extra personnel have limited facility access unless they buy a $25 day pass."},
+    {type:"scenario",q:"A member is upset that they were charged a reset fee. They say they 'put everything back.' How do you explain what the reset standard actually requires, and what could have caused the fee?",a:"'Put everything back' is not the standard: the room must be returned to the plug-and-play standard AND any changed software routing restored via the Room Procedures list. A left-over routing change or a non-standard physical setup triggers the fee ($50 Live, $30 others). Full marks = explains the routing/procedures requirement, not just 'tidy up.'"},
+    {type:"scenario",q:"A prospective member on a tour asks, 'what's the real difference between Club and Platinum besides price?' Give the honest, specific answer.",a:"Every tier gets the same 3x ratio, so Platinum's $5,400 is four times Club's $1,350, with a bigger rollover bank to match, and Platinum adds 24-hour access on open days. Everything else (rooms, community, wellness, events) is shared. Do not invent perks."},
+    {type:"write",q:"In your own words: why do we require an engineer when studio equipment is in use?",a:"Judgment: safety and protecting the gear and the session. Full marks name protecting expensive equipment and keeping the session running smoothly for the member."}
+  ]};
+
+  var app=document.getElementById("app");
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[c];});}
+  function el(html){var d=document.createElement("div");d.innerHTML=html;return d.firstElementChild;}
+  function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+  function pts(it){return it.type==="scenario"?2:1;}
+  function total(sec){return sec.items.reduce(function(n,it){return n+pts(it);},0);}
+
+  function renderSection(sec,isExam){
+    var old=document.getElementById(sec.id); var s=el('<section id="'+sec.id+'"></section>');
+    if(old) old.replaceWith(s); else app.appendChild(s);
+    var state={checked:false,items:sec.items.map(function(it){var o={mark:null,order:null};if(it.type==="mc"){o.order=shuffle(it.c.map(function(_,k){return k;}));}return o;})};
+    s.appendChild(el('<div class="qz-head"><span class="qz-num">'+esc(sec.num)+'</span><span class="qz-when">'+esc(sec.when)+'</span></div>'));
+    s.appendChild(el('<h2>'+esc(sec.title)+'</h2>'));
+    s.appendChild(el('<p class="qz-note">'+esc(sec.note)+'</p>'));
+    if(isExam) s.appendChild(el('<p class="examline">Name ______________________ &nbsp; Date ____________ &nbsp; Score ______ / '+total(sec)+'</p>'));
+    var ol=el('<ol class="qs"></ol>');
+    sec.items.forEach(function(it,i){
+      var li=el('<li></li>');
+      if(it.type==="scenario"){li.appendChild(el('<div class="qtext scenario"><span class="tag">Scenario · two points</span>'+esc(it.q)+'</div>'));}
+      else{li.appendChild(el('<div class="qtext">'+esc(it.q)+'</div>'));}
+      if(it.type==="mc"){
+        var opts=el('<div class="opts"></div>');
+        state.items[i].order.forEach(function(k){
+          var lab=el('<label class="opt"><input type="radio" name="'+sec.id+'-'+i+'" value="'+k+'"><span>'+esc(it.c[k])+'</span></label>');
+          opts.appendChild(lab);
+        });
+        li.appendChild(opts);
+      }else{
+        li.appendChild(el('<textarea rows="3" placeholder="Write your answer" aria-label="Your answer"></textarea>'));
+      }
+      li.appendChild(el('<div class="fb"></div>'));
+      ol.appendChild(li);
+    });
+    s.appendChild(ol);
+    var acts=el('<div class="acts"></div>');
+    var check=el('<button class="btn">Check answers</button>');
+    var retake=el('<button class="btn ghost">Clear and retake</button>');
+    var score=el('<span class="score">Score 0 / '+total(sec)+'</span>');
+    var verdict=el('<div class="verdict"></div>');
+    acts.appendChild(check);acts.appendChild(retake);acts.appendChild(score);acts.appendChild(verdict);
+    s.appendChild(acts);
+
+    function tally(){
+      var got=0,unmarked=0;
+      sec.items.forEach(function(it,i){
+        var li=ol.children[i];
+        if(it.type==="mc"){var sel=li.querySelector("input:checked");if(sel&&Number(sel.value)===it.a) got+=1;}
+        else{if(state.items[i].mark===null) unmarked+=1; else got+=state.items[i].mark;}
+      });
+      score.textContent="Score "+got+" / "+total(sec);
+      if(!state.checked){verdict.textContent="";verdict.className="verdict";return;}
+      if(unmarked>0){verdict.className="verdict wait";verdict.textContent="Mark the written answers to finish scoring ("+unmarked+" left).";return;}
+      if(isExam){
+        var pass=got>=sec.pass;
+        verdict.className="verdict "+(pass?"pass":"fail");
+        verdict.textContent=pass?("Pass: "+got+" of "+total(sec)+". "+(got===total(sec)?"Perfect.":"Clean up the misses before the real thing.")):("Not yet: "+got+" of "+total(sec)+", "+sec.pass+" needed. Review, then retake.");
+      }else{
+        var n=total(sec), need=Math.ceil(n*0.9);
+        verdict.className="verdict "+(got>=need?"pass":"fail");
+        verdict.textContent=got===n?"Clean sweep.":(got>=need?"Passing. Now go for a clean sweep.":"Keep going. You need "+need+" of "+n+" to clear this one.");
+      }
+    }
+
+    check.onclick=function(){
+      state.checked=true;
+      sec.items.forEach(function(it,i){
+        var li=ol.children[i], fb=li.querySelector(".fb");
+        if(it.type==="mc"){
+          var sel=li.querySelector("input:checked");
+          li.querySelectorAll(".opt").forEach(function(lab){
+            var k=Number(lab.querySelector("input").value); lab.querySelector("input").disabled=true; lab.classList.add("locked");
+            if(k===it.a) lab.classList.add("correct"); else if(sel&&Number(sel.value)===k) lab.classList.add("wrong"); else lab.classList.add("mute");
+          });
+          if(!sel){fb.className="fb no";fb.textContent="No answer. The answer is: "+it.c[it.a];}
+          else if(Number(sel.value)===it.a){fb.className="fb ok";fb.textContent="Correct.";}
+          else{fb.className="fb no";fb.textContent="Not this one. The answer is: "+it.c[it.a];}
+        }else{
+          var ta=li.querySelector("textarea"); ta.disabled=true;
+          fb.className="fb"; fb.innerHTML="";
+          fb.appendChild(el('<div class="model"><span class="k">Model answer</span>'+esc(it.a)+'</div>'));
+          var mark=el('<div class="mark"><span>Mark it:</span></div>');
+          var choices=it.type==="scenario"?[[2,"Full marks (2)"],[1,"Half (1)"],[0,"Not yet (0)"]]:[[1,"Correct (1)"],[0,"Not yet (0)"]];
+          choices.forEach(function(c){
+            var b=el('<button type="button">'+c[1]+'</button>');
+            b.onclick=function(){state.items[i].mark=c[0];mark.querySelectorAll("button").forEach(function(x){x.classList.remove("on");});b.classList.add("on");tally();};
+            mark.appendChild(b);
+          });
+          fb.appendChild(mark);
+        }
+      });
+      check.disabled=true; tally();
+      var first=s.querySelector(".fb.no, .mark"); if(first) first.scrollIntoView({block:"center",behavior:"smooth"});
+    };
+    retake.onclick=function(){renderSection(sec,isExam);};
+    ol.addEventListener("change",function(){if(!state.checked) tally();});
+    tally();
+  }
+
+  function renderKey(){
+    var kb=document.getElementById("keybody"); kb.innerHTML="";
+    QUIZZES.concat([EXAM]).forEach(function(sec){
+      var blk=el('<div class="keyblock"><h4>'+esc(sec.num)+' · '+esc(sec.title)+'</h4><ol></ol></div>');
+      var ol=blk.querySelector("ol");
+      sec.items.forEach(function(it){
+        var a=it.type==="mc"?it.c[it.a]:it.a;
+        ol.appendChild(el('<li>'+(it.type==="scenario"?'<b>Scenario (2 pts).</b> ':'')+esc(a)+'</li>'));
+      });
+      kb.appendChild(blk);
+    });
+  }
+
+  QUIZZES.forEach(function(sec){renderSection(sec,false);});
+  renderSection(EXAM,true);
+  renderKey();
+
+  var k=document.getElementById("key");
+  window.addEventListener("beforeprint",function(){k.open=true;});
+  var a=document.querySelector('nav a[href="#key"]'); if(a) a.addEventListener("click",function(){k.open=true;});
+})();
 </script>
 
 </body>
